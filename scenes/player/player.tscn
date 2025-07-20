@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bq67x3j6voxhr"]
 
-[ext_resource type="Script" uid="uid://d37t450ko0yvr" path="res://Scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://d37t450ko0yvr" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://dljy3gtchhv4e" path="res://assets/player/bobr.png" id="2_dovo2"]
-[ext_resource type="PackedScene" uid="uid://dhfguvj0h4uxl" path="res://Scenes/UI/ui.tscn" id="3_gmlin"]
+[ext_resource type="PackedScene" uid="uid://dhfguvj0h4uxl" path="res://scenes/UI/ui.tscn" id="3_gmlin"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lvxji"]
 animations = [{
@@ -25,9 +25,10 @@ script = ExtResource("1_dovo2")
 [node name="Head" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.671745, 1.26684)
+transform = Transform3D(1, 0, 0, 0, 0.996249, 0.0865298, 0, -0.0865298, 0.996249, 0, 0.479437, 1.40191)
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98133e-05, 1.49012e-08, -0.00402242)
 shaded = true
 alpha_cut = 2
 texture_filter = 0

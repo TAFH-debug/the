@@ -1,17 +1,17 @@
 extends CharacterBody3D
 
-const SENSITIVITY = 0.004
-
+@onready var head: Node3D = $Head
+@onready var camera: Camera3D = $Head/Camera3D
 @onready var sprite: AnimatedSprite3D = $Sprite
 @export var FLIP_SPEED: float = 15.0
-var face_right: bool = true
-var base_angle = 0.0
-
 @export var SPEED: float = 1.8
 @export var JUMP_VELOCITY: float = 3.0
+@export var SENSITIVITY: float = 0.004
+var face_right: bool = true
+var base_angle: float = 0.0
 
-@onready var head = $Head
-@onready var camera = $Head/Camera3D
+
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -19,8 +19,8 @@ func _ready():
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+		#camera.rotate_x(-event.relative.y * SENSITIVITY)
+		#camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
 		print(head.rotation.y)
 		base_angle = head.rotation.y
 		
