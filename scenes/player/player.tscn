@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bq67x3j6voxhr"]
 
-[ext_resource type="Script" uid="uid://d37t450ko0yvr" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://d37t450ko0yvr" path="res://Scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://dljy3gtchhv4e" path="res://assets/player/bobr.png" id="2_dovo2"]
-[ext_resource type="PackedScene" uid="uid://dhfguvj0h4uxl" path="res://scenes/UI/ui.tscn" id="3_gmlin"]
+[ext_resource type="PackedScene" uid="uid://dhfguvj0h4uxl" path="res://Scenes/UI/ui.tscn" id="3_gmlin"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lvxji"]
 animations = [{
@@ -22,8 +22,12 @@ height = 0.391679
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_dovo2")
 
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.671745, 1.26684)
+
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shaded = true
 alpha_cut = 2
 texture_filter = 0
@@ -31,8 +35,5 @@ sprite_frames = SubResource("SpriteFrames_lvxji")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_p47bc")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.671745, 1.26684)
 
 [node name="UI" parent="." instance=ExtResource("3_gmlin")]

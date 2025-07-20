@@ -1,12 +1,29 @@
 extends CharacterBody3D
 
+const SENSITIVITY = 0.004
+
 @onready var sprite: AnimatedSprite3D = $Sprite
 @export var FLIP_SPEED: float = 15.0
 var face_right: bool = true
+var base_angle = 0.0
 
 @export var SPEED: float = 1.8
 @export var JUMP_VELOCITY: float = 3.0
 
+@onready var head = $Head
+@onready var camera = $Head/Camera3D
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		head.rotate_y(-event.relative.x * SENSITIVITY)
+		camera.rotate_x(-event.relative.y * SENSITIVITY)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+		print(head.rotation.y)
+		base_angle = head.rotation.y
+		
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	
@@ -16,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction := (transform.basis.rotated(Vector3(0, 1, 0), base_angle) * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
@@ -33,6 +50,6 @@ func _physics_process(delta: float) -> void:
 		face_right = false
 		
 	if face_right:
-		sprite.rotation_degrees.y = move_toward(sprite.rotation_degrees.y, 0.0, FLIP_SPEED)
+		sprite.rotation_degrees.y = move_toward(sprite.rotation_degrees.y, rad_to_deg(base_angle), FLIP_SPEED)
 	else:
-		sprite.rotation_degrees.y = move_toward(sprite.rotation_degrees.y, 180.0, FLIP_SPEED)
+		sprite.rotation_degrees.y = move_toward(sprite.rotation_degrees.y, rad_to_deg(base_angle) + 180, FLIP_SPEED)
