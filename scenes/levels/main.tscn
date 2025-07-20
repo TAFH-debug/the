@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxbgdrshda4mh"]
+
+[ext_resource type="PackedScene" uid="uid://bq67x3j6voxhr" path="res://scenes/player/player.tscn" id="2_2vj2h"]
+[ext_resource type="Texture2D" uid="uid://b1gbvmlhp0vry" path="res://addons/kenney_prototype_textures/light/texture_07.png" id="2_y0acb"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2vj2h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4d2a"]
+albedo_texture = ExtResource("2_y0acb")
+uv1_triplanar = true
+uv2_triplanar = true
+uv2_world_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j4d2a"]
+lightmap_size_hint = Vector2i(502, 502)
+material = SubResource("StandardMaterial3D_j4d2a")
+size = Vector2(100, 100)
+
+[node name="Main" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("2_2vj2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_2vj2h")
+metadata/_edit_lock_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_j4d2a")
+metadata/_edit_lock_ = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.777714, -0.425392, 0.462821, -0.0422757, 0.69919, 0.713685, -0.627196, -0.574609, 0.525785, 0, -0.957598, 0)
+shadow_enabled = true
