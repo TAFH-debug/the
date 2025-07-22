@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://yo3pl1kven74"]
+
+[ext_resource type="Script" uid="uid://0mkqyjqqjget" path="res://scenes/items/weapons/projectile.gd" id="1_vux2r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amvvb"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_amvvb"]
+material = SubResource("StandardMaterial3D_amvvb")
+radius = 0.02
+height = 0.1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_amvvb"]
+radius = 0.01
+height = 0.02
+
+[node name="Projectile" type="RigidBody3D"]
+transform = Transform3D(0.999994, -0.00315273, 0.00111539, 0.00316125, 0.999965, -0.00771737, -0.001091, 0.00772085, 0.99997, 0, 0, 0)
+mass = 0.5
+gravity_scale = 0.0
+script = ExtResource("1_vux2r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_amvvb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_amvvb")
+
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_amvvb")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

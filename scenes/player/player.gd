@@ -1,7 +1,9 @@
 extends CharacterBody3D
 
+@onready var gun: Node3D = $Sprite/Gun
 @onready var head: Node3D = $Head
-@onready var camera: Camera3D = $Head/Camera3D
+@onready var camera: Camera3D = $Head/SpringArm3D/Camera3D
+@onready var cam_arm: SpringArm3D = $Head/SpringArm3D
 @onready var sprite: AnimatedSprite3D = $Sprite
 @export var FLIP_SPEED: float = 15.0
 @export var SPEED: float = 1.8
@@ -15,15 +17,18 @@ var base_angle: float = 0.0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	print(head.rotation.x)
+	
 	
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		head.rotate_y(-event.relative.x * SENSITIVITY)
-		#camera.rotate_x(-event.relative.y * SENSITIVITY)
-		#camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
-		print(head.rotation.y)
+		#cam_arm.rotate_x(-event.relative.y * SENSITIVITY)
+		cam_arm.rotation.x = clamp(cam_arm.rotation.x, deg_to_rad(-90), deg_to_rad(0))
 		base_angle = head.rotation.y
 		
+		sprite.rotate_y(-event.relative.x * SENSITIVITY)
+		#gun.rotate_y(-event.relative.x * SENSITIVITY)
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	
@@ -44,6 +49,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 #	flipping logic
+	
 	if input_dir.x > 0.0: 
 		face_right = true
 	elif input_dir.x < 0.0:

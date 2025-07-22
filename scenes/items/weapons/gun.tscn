@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://c004w2wbe08ic"]
+
+[ext_resource type="Script" uid="uid://dh2je8uo34le1" path="res://scenes/items/weapons/gun.gd" id="1_uw0da"]
+[ext_resource type="Texture2D" uid="uid://bhpyciocbybj6" path="res://assets/items/weapons/pewpew_stick.png" id="1_wyjai"]
+[ext_resource type="Script" uid="uid://bbsaqvdxf84cc" path="res://scenes/items/weapons/WeaponStats.gd" id="2_t680d"]
+[ext_resource type="PackedScene" uid="uid://yo3pl1kven74" path="res://scenes/items/weapons/projectile.tscn" id="2_v6xdk"]
+
+[sub_resource type="Resource" id="Resource_v6xdk"]
+script = ExtResource("2_t680d")
+damage = 1.0
+fire_rate = 1.0
+projectile_scene = ExtResource("2_v6xdk")
+speed = 5.0
+metadata/_custom_type_script = "uid://bbsaqvdxf84cc"
+
+[node name="Gun" type="Node3D"]
+script = ExtResource("1_uw0da")
+stats = SubResource("Resource_v6xdk")
+
+[node name="BulletSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.292777)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("1_wyjai")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+shaded = true
+alpha_cut = 2
+texture_filter = 0
+texture = ExtResource("1_wyjai")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bq67x3j6voxhr"]
+[gd_scene load_steps=7 format=3 uid="uid://bq67x3j6voxhr"]
 
 [ext_resource type="Script" uid="uid://d37t450ko0yvr" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="Texture2D" uid="uid://dljy3gtchhv4e" path="res://assets/player/bobr.png" id="2_dovo2"]
+[ext_resource type="PackedScene" uid="uid://c004w2wbe08ic" path="res://scenes/items/weapons/gun.tscn" id="2_lvxji"]
 [ext_resource type="PackedScene" uid="uid://dhfguvj0h4uxl" path="res://scenes/UI/ui.tscn" id="3_gmlin"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lvxji"]
@@ -22,17 +23,24 @@ height = 0.391679
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_dovo2")
 
-[node name="Head" type="Node3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, 0.996249, 0.0865298, 0, -0.0865298, 0.996249, 0, 0.479437, 1.40191)
-
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.98133e-05, 1.49012e-08, -0.00402242)
 shaded = true
 alpha_cut = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_lvxji")
+
+[node name="Gun" parent="Sprite" instance=ExtResource("2_lvxji")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.053, -0.02, 0)
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17013, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Head"]
+transform = Transform3D(1, 0.000127585, -0.000602971, -0.000128735, 0.999998, -0.00192845, 0.000602726, 0.00192853, 0.999998, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -5.96046e-08, 0, 5.96046e-08, 1, 0, 0, 0)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_p47bc")

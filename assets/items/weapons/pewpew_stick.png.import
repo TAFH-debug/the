@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://co1npjm5uy17y"
-path.s3tc="res://.godot/imported/texture_08.png-7b5c5c16cd076d2bbc9eeb33a454861b.s3tc.ctex"
+uid="uid://bhpyciocbybj6"
+path.s3tc="res://.godot/imported/pewpew_stick.png-3e48e121dcf048600befaf67079d3b80.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/kenney_prototype_textures/light/texture_08.png"
-dest_files=["res://.godot/imported/texture_08.png-7b5c5c16cd076d2bbc9eeb33a454861b.s3tc.ctex"]
+source_file="res://assets/items/weapons/pewpew_stick.png"
+dest_files=["res://.godot/imported/pewpew_stick.png-3e48e121dcf048600befaf67079d3b80.s3tc.ctex"]
 
 [params]
 
